@@ -11,9 +11,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Release
-        uses: softprops/action-gh-release@v1
+        uses: marvinpinto/action-automatic-releases@latest
         with:
-          files: test
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
           prerelease: ${{ github.ref_type != 'tag' }}
-          tag_name: ${{ github.ref_type != 'tag' && 'latest' || null }}
-          name: ${{ github.ref_type != 'tag' && format('Build {0}', github.run_number) || null }}
+          automatic_release_tag: ${{ github.ref_type != 'tag' && 'latest' || null }}
+          title: ${{ github.ref_type != 'tag' && format('Build {0}', github.run_number) || null }}
+          files: test
