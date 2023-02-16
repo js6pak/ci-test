@@ -1,0 +1,18 @@
+name: CI
+
+on:
+  push:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: test
+          prerelease: ${{ github.ref_type != 'tag' }}
+          tag_name: ${{ github.ref_type != 'tag' && 'latest' || null }}
+          name: ${{ github.ref_type != 'tag' && 'Build ${{ github.run_number }}' || null }}
