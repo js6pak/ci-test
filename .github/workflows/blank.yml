@@ -15,5 +15,5 @@ jobs:
         with:
           files: test
           prerelease: ${{ github.ref_type != 'tag' }}
-          tag_name: ${{ github.ref_type != 'tag' && 'latest' || undefined }}
-          name: ${{ github.ref_type != 'tag' && 'Build ${{ github.run_number }}' || undefined }}
+          tag_name: ${{ github.ref_type != 'tag' && 'latest' || null }}
+          name: ${{ github.ref_type != 'tag' && 'Build ${{ github.run_number }}' || null }}
