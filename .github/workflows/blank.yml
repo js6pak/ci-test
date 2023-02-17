@@ -8,9 +8,13 @@ jobs:
   build:
     permissions: write-all
     runs-on: windows-2019
+    strategy:
+      matrix:
+        image: [ unityci/editor:windows-2022.2.6f1-windows-il2cpp-1, unityci/editor:windows-2020.3.22f1-windows-il2cpp-1, unityci/hub:windows-latest ]
 
     steps:
       - uses: actions/checkout@v3
+      - run: docker pull docker run ${{ matrix.image }}
       - name: Setup tmate session
         uses: mxschmitt/action-tmate@v3
         with:
