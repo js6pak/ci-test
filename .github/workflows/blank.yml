@@ -6,15 +6,20 @@ on:
 jobs:
   build:
     permissions: write-all
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
       - uses: actions/checkout@v3
-      - name: Release
-        uses: marvinpinto/action-automatic-releases@latest
+      - name: Setup upterm session
+        uses: lhotari/action-upterm@v1
         with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          prerelease: ${{ github.ref_type != 'tag' }}
-          automatic_release_tag: ${{ github.ref_type != 'tag' && 'latest' || null }}
-          title: ${{ github.ref_type != 'tag' && format('Build {0}', github.run_number) || null }}
-          files: test
+          limit-access-to-actor: true
+          limit-access-to-users: js6pak
+#       - name: Release
+#         uses: marvinpinto/action-automatic-releases@latest
+#         with:
+#           repo_token: "${{ secrets.GITHUB_TOKEN }}"
+#           prerelease: ${{ github.ref_type != 'tag' }}
+#           automatic_release_tag: ${{ github.ref_type != 'tag' && 'latest' || null }}
+#           title: ${{ github.ref_type != 'tag' && format('Build {0}', github.run_number) || null }}
+#           files: test
