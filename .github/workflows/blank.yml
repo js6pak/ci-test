@@ -5,7 +5,14 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  nothing:
+    runs-on: windows-2019
+    steps:
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+        with:
+          limit-access-to-actor: true
+  image:
     permissions: write-all
     runs-on: windows-2019
     strategy:
@@ -16,7 +23,6 @@ jobs:
           - "unityci/hub:windows-latest"
 
     steps:
-      - uses: actions/checkout@v3
       - run: docker pull ${{ matrix.image }}
       - name: Setup tmate session
         uses: mxschmitt/action-tmate@v3
